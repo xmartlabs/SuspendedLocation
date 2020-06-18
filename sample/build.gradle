@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: rootProject.file('versions.gradle')
+
+android {
+    compileSdkVersion androidVersions.compileSdk
+    buildToolsVersion androidVersions.buildTools
+
+    defaultConfig {
+        applicationId "com.xmartlabs.sample"
+        minSdkVersion androidVersions.minSdk
+        targetSdkVersion androidVersions.targetSdk
+        versionCode 1
+        versionName ""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(":SuspendedLocation")
+
+    implementation deps.anotations
+    implementation deps.appcompat
+    implementation deps.constraintLayout
+    implementation deps.coreKtx
+    implementation deps.corutines
+    implementation deps.kotlin
+    implementation deps.playServicesLocation
+
+    testImplementation test.junit
+    androidTestImplementation test.testJunit
+    androidTestImplementation test.espresso
+}
