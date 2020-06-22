@@ -1,0 +1,35 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    apply from: 'versions.gradle'
+    addRepos(repositories)
+    dependencies {
+        classpath buildscriptDeps.gradle
+        classpath buildscriptDeps.detekt
+        classpath buildscriptDeps.kotlin
+        classpath buildscriptDeps.kotlinExtensions
+    }
+}
+
+apply from: rootProject.file('versions.gradle')
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+dependencies {
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$versions.detekt"
+}
+
+detekt {
+    autoCorrect = true
+    config = files("$rootDir/.detekt/detekt-config.yml")
+    input = files(rootProject.rootDir)
+    parallel = true
+    toolVersion = "$versions.detekt"
+}
+
+allprojects {
+    apply from: rootProject.file('versions.gradle')
+    addRepos(repositories)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

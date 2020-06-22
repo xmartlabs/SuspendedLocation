@@ -1,0 +1,61 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+
+def androidVersions = [:]
+androidVersions.minSdk = 21
+androidVersions.compileSdk = 29
+androidVersions.buildTools = '29.0.3'
+androidVersions.targetSdk = 29
+ext.androidVersions = androidVersions
+
+ext.deps = [:]
+def versions = [:]
+versions.anotations = "28.0.0"
+versions.appcompat = "1.1.0"
+versions.constraintLayout = "1.1.3"
+versions.coreKtx = "1.3.0"
+versions.corutines = "1.3.5"
+versions.detekt = "1.8.0"
+versions.espresso = "3.2.0"
+versions.gradle = "4.0.0"
+versions.junit = "4.12"
+versions.kotlin = "1.3.72"
+versions.playServicesLocation = "17.0.0"
+versions.testJunit = "1.1.1"
+
+ext.versions = versions
+
+def deps = [:]
+deps.anotations = "com.android.support:support-annotations:$versions.anotations"
+deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+deps.constraintLayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+deps.coreKtx = "androidx.core:core-ktx:$versions.coreKtx"
+deps.corutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.corutines"
+deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+deps.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesLocation"
+ext.deps = deps
+
+def test = [:]
+test.junit = "junit:junit:$versions.junit"
+test.testJunit = "androidx.test.ext:junit:$versions.testJunit"
+test.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+
+ext.test = test
+
+ext.buildscriptDeps = [:]
+buildscriptDeps.detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt"
+buildscriptDeps.gradle = "com.android.tools.build:gradle:$versions.gradle"
+buildscriptDeps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+buildscriptDeps.kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
+ext.buildscriptDeps = buildscriptDeps
+
+static def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.mavenCentral()
+    handler.gradlePluginPortal()
+    handler.jcenter()
+}
+
+ext.addRepos = this.&addRepos
