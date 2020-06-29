@@ -5,8 +5,8 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import androidx.annotation.RequiresPermission
-import androidx.annotation.WorkerThread
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -20,9 +20,11 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 object SuspendedLocation {
@@ -52,6 +54,18 @@ object SuspendedLocation {
                             this@callbackFlow.send(locationResult.lastLocation)
                         }
                     }
+
+                    override fun onLocationAvailability(locationAvailability: LocationAvailability) {
+                        super.onLocationAvailability(locationAvailability)
+                        if (!locationAvailability.isLocationAvailable) {
+                            launch(runnerContext) {
+                                this@callbackFlow.cancel(
+                                    "Location not available",
+                                    IOException("Location not available")
+                                )
+                            }
+                        }
+                    }
                 },
                 locationServices.looper
             )
@@ -74,39 +88,57 @@ object SuspendedLocation {
                                 continuation.resume(locationResult.lastLocation)
                             }
                         }
+
+                        override fun onLocationAvailability(locationAvailability: LocationAvailability) {
+                            super.onLocationAvailability(locationAvailability)
+                            if (!locationAvailability.isLocationAvailable) {
+                                launch(runnerContext) {
+                                    continuation.resumeWithException(
+                                        IOException("Location not available")
+                                    )
+                                }
+                            }
+                        }
                     },
                     locationServices.looper
                 )
         }
     }
 
-    @WorkerThread
     suspend fun reverseGeocode(
         location: LatLong,
         maxResults: Int,
         runnerContext: CoroutineContext = Dispatchers.Default
     ): List<Address> = withContext(runnerContext) {
         suspendCoroutine { continuation: Continuation<List<Address>> ->
-            continuation.resume(
-                Geocoder(context).getFromLocation(location.lat, location.long, maxResults)
-            )
+            try {
+                continuation.resume(
+                    Geocoder(context).getFromLocation(location.lat, location.long, maxResults)
+                )
+            } catch (io: IOException) {
+                continuation.resumeWithException(io)
+            } catch (illegalArgument: IllegalArgumentException) {
+                continuation.resumeWithException(illegalArgument)
+            }
         }
     }
 
-    @WorkerThread
     suspend fun geocode(
         locationName: String,
         maxResults: Int,
         runnerContext: CoroutineContext = Dispatchers.Default
     ): List<Address> = withContext(runnerContext) {
         suspendCoroutine { continuation: Continuation<List<Address>> ->
-            continuation.resume(
-                Geocoder(context).getFromLocationName(locationName, maxResults)
-            )
+            try {
+                continuation.resume(
+                    Geocoder(context).getFromLocationName(locationName, maxResults)
+                )
+            } catch (io: IOException) {
+                continuation.resumeWithException(io)
+            }
         }
     }
 
-    @WorkerThread
     suspend fun geocode(
         locationName: String,
         startingPoint: LatLong,
@@ -115,16 +147,22 @@ object SuspendedLocation {
         runnerContext: CoroutineContext = Dispatchers.Default
     ): List<Address> = withContext(runnerContext) {
         suspendCoroutine { continuation: Continuation<List<Address>> ->
-            continuation.resume(
-                Geocoder(context).getFromLocationName(
-                    locationName,
-                    maxResults,
-                    startingPoint.lat,
-                    startingPoint.long,
-                    endPoint.lat,
-                    endPoint.long
+            try {
+                continuation.resume(
+                    Geocoder(context).getFromLocationName(
+                        locationName,
+                        maxResults,
+                        startingPoint.lat,
+                        startingPoint.long,
+                        endPoint.lat,
+                        endPoint.long
+                    )
                 )
-            )
+            } catch (io: IOException) {
+                continuation.resumeWithException(io)
+            } catch (illegalArgument: IllegalArgumentException) {
+                continuation.resumeWithException(illegalArgument)
+            }
         }
     }
 }
