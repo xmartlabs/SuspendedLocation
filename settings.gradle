@@ -1,3 +1,4 @@
+include ':SuspendedPlaces'
 include ':sample'
 include ':SuspendedLocation'
 rootProject.name = "SuspendedLocation"
