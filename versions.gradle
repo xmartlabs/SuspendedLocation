@@ -22,6 +22,7 @@ versions.espresso = "3.2.0"
 versions.gradle = "4.0.0"
 versions.junit = "4.12"
 versions.kotlin = "1.3.72"
+versions.places = "2.3.0"
 versions.playServicesLocation = "17.0.0"
 versions.testJunit = "1.1.1"
 
@@ -34,6 +35,7 @@ deps.constraintLayout = "androidx.constraintlayout:constraintlayout:$versions.co
 deps.coreKtx = "androidx.core:core-ktx:$versions.coreKtx"
 deps.corutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.corutines"
 deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+deps.places = "com.google.android.libraries.places:places:$versions.places"
 deps.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesLocation"
 ext.deps = deps
 
