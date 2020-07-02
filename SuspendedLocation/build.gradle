@@ -32,7 +32,6 @@ dependencies {
     implementation deps.coreKtx
     implementation deps.corutines
     implementation deps.kotlin
-    implementation deps.places
     implementation deps.playServicesLocation
 
     testImplementation test.junit

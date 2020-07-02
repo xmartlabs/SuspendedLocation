@@ -33,7 +33,7 @@ object SuspendedPlaces {
     suspend fun placesAutocomplete(
         autocompleteRequest: FindAutocompletePredictionsRequest,
         runnerContext: CoroutineContext
-    ): List<AutocompletePrediction> = runWithPlaces { placesClient ->
+    ): List<AutocompletePrediction> = placesClient.runWithPlaces { placesClient ->
         withContext(runnerContext) {
             placesClient.findAutocompletePredictions(autocompleteRequest)
                 .taskToCoroutine()
@@ -47,7 +47,7 @@ object SuspendedPlaces {
     suspend fun findCurrentPlace(
         findCurrentPlaceRequest: FindCurrentPlaceRequest,
         runnerContext: CoroutineContext
-    ): List<PlaceLikelihood> = runWithPlaces { placesClient ->
+    ): List<PlaceLikelihood> = placesClient.runWithPlaces { placesClient ->
         withContext(runnerContext) {
             placesClient.findCurrentPlace(findCurrentPlaceRequest)
                 .taskToCoroutine()
@@ -58,7 +58,7 @@ object SuspendedPlaces {
     suspend fun fetchPlace(
         fetchPlaceRequest: FetchPlaceRequest,
         runnerContext: CoroutineContext
-    ): Place = runWithPlaces { placesClient ->
+    ): Place = placesClient.runWithPlaces { placesClient ->
         withContext(runnerContext) {
             placesClient.fetchPlace(fetchPlaceRequest)
                 .taskToCoroutine()
@@ -69,7 +69,7 @@ object SuspendedPlaces {
     suspend fun fetchPhoto(
         fetchPhotoRequest: FetchPhotoRequest,
         runnerContext: CoroutineContext
-    ): Bitmap = runWithPlaces { placesClient ->
+    ): Bitmap = placesClient.runWithPlaces { placesClient ->
         withContext(runnerContext) {
             placesClient.fetchPhoto(fetchPhotoRequest)
                 .taskToCoroutine()
@@ -77,6 +77,6 @@ object SuspendedPlaces {
         }
     }
 
-    private inline fun <T> runWithPlaces(function: (PlacesClient) -> T): T =
-        placesClient?.let { function.invoke(it) } ?: throw PlacesNotInitializedException()
+    private inline fun <T> PlacesClient?.runWithPlaces(function: (PlacesClient) -> T): T =
+        this?.let { function.invoke(it) } ?: throw PlacesNotInitializedException()
 }
