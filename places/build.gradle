@@ -1,22 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: rootProject.file('versions.gradle')
 
 android {
     compileSdkVersion androidVersions.compileSdk
     buildToolsVersion androidVersions.buildTools
 
     defaultConfig {
-        applicationId "com.xmartlabs.sample"
         minSdkVersion androidVersions.minSdk
         targetSdkVersion androidVersions.targetSdk
         versionCode 1
         versionName ""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -33,10 +29,10 @@ dependencies {
 
     implementation deps.anotations
     implementation deps.appcompat
-    implementation deps.constraintLayout
     implementation deps.coreKtx
     implementation deps.corutines
     implementation deps.kotlin
+    implementation deps.places
     implementation deps.playServicesLocation
 
     testImplementation test.junit
