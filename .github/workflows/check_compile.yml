@@ -51,7 +51,7 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Install NDK
         run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
-      - name: Build App
+      - name: Build Library
         run: ./gradlew build
       - name: Upload Report
         uses: actions/upload-artifact@v1
