@@ -2,11 +2,11 @@
 ![Check and compile](https://github.com/xmartlabs/SuspendedLocation/workflows/Check%20and%20compile/badge.svg?branch=master)
 [![Release](https://jitpack.io/v/xmartlabs/AndroidSwissKnife.svg)](https://jitpack.io/#xmartlabs/SuspendedLocation)
 
-A library that wraps the google [places](https://developers.google.com/places/android-sdk/overview) and [geolocation](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) Apis through coroutines
+A library that wraps the google [places](https://developers.google.com/places/android-sdk/overview) and [geolocation](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) APIs through coroutines
 
-It's divided into a series of modules with different proposes:
-- [Core](/core): Contains functions that wraps [geolocation](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) api.
-- [Places](/places): Contains functions that wraps [places](https://developers.google.com/places/android-sdk/overview) api.
+It's divided into a series of modules with different purposes:
+- [Core](/core): Contains functions that wrap [geolocation](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) API.
+- [Places](/places): Contains functions that wrap [places](https://developers.google.com/places/android-sdk/overview) API.
 
 ## Setup
 Add library to project dependencies with JitPack.
