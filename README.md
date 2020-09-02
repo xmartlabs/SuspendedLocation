@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-    implementation "com.github.xmartlabs.SuspendedLocation:core:${master-latest-hash-commit}"
-    implementation "com.github.xmartlabs.SuspendedLocation:places:${master-latest-hash-commit}"
+    implementation "com.github.xmartlabs.SuspendedLocation:core:1.0.0"
+    implementation "com.github.xmartlabs.SuspendedLocation:places:1.0.0"
 }
 ```
 
