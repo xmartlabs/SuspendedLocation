@@ -12,6 +12,7 @@ buildscript {
 }
 
 apply from: rootProject.file('versions.gradle')
+apply from: rootProject.file('scripts/stop_ship_check_xmls.gradle.kts')
 apply plugin: "io.gitlab.arturbosch.detekt"
 
 dependencies {
@@ -21,7 +22,11 @@ dependencies {
 detekt {
     autoCorrect = true
     config = files("$rootDir/.detekt/detekt-config.yml")
-    input = files(rootProject.rootDir)
+    input = files(
+            "${rootProject.rootDir}/sample",
+            "${rootProject.rootDir}/SuspendLocation",
+            "${rootProject.rootDir}/SuspendedPlaces"
+    )
     parallel = true
     toolVersion = "$versions.detekt"
 }
@@ -29,6 +34,10 @@ detekt {
 allprojects {
     apply from: rootProject.file('versions.gradle')
     addRepos(repositories)
+}
+
+task check() {
+    dependsOn("checkStopShipXmls")
 }
 
 task clean(type: Delete) {
