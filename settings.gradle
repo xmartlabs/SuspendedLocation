@@ -1,4 +1,2 @@
-include ':SuspendedLocation'
-include ':SuspendedPlaces'
-include ':sample'
+include ':core', ':places', ':sample'
 rootProject.name = "SuspendedLocation"
