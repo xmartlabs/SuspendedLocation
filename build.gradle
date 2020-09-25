@@ -8,6 +8,7 @@ buildscript {
         classpath buildscriptDeps.detekt
         classpath buildscriptDeps.kotlin
         classpath buildscriptDeps.kotlinExtensions
+        classpath buildscriptDeps.googleServices
     }
 }
 

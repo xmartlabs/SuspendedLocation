@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "961268617224",
+    "firebase_url": "https://suspendedlocationsample.firebaseio.com",
+    "project_id": "suspendedlocationsample",
+    "storage_bucket": "suspendedlocationsample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961268617224:android:290e700dc26cf81cfb41bd",
+        "android_client_info": {
+          "package_name": "com.xmartlabs.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961268617224-ohcb7656geavoon4anlh0a23kimdlvgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5TYLbFlaba_FjWA_3FBC3NUKKOghqNV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961268617224-ohcb7656geavoon4anlh0a23kimdlvgq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

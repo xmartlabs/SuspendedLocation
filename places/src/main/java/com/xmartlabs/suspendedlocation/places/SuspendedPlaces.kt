@@ -42,7 +42,7 @@ object SuspendedPlaces {
   suspend fun placesAutocomplete(
       autocompleteRequest: FindAutocompletePredictionsRequest,
       runnerContext: CoroutineContext
-  ): List<AutocompletePrediction> = placesClient?.runWithPlaces {
+  ): List<AutocompletePrediction> = placesClient?.runWithPlaces(runnerContext) {
     findAutocompletePredictions(autocompleteRequest)
   }?.autocompletePredictions ?: listOf()
 
