@@ -18,6 +18,10 @@ import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 
 class LocationFragment : Fragment() {
+  companion object {
+    const val NUMBER_OF_REQUEST = 5
+    const val INTERVAL = 300L
+  }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
       layoutInflater.inflate(R.layout.location_fragment, container, false)
@@ -39,7 +43,7 @@ class LocationFragment : Fragment() {
     btnCurrentLocationMultiple.setOnClickListener {
       lifecycleScope.launch() {
         SuspendedLocation.requestCurrentLocation(
-            LocationRequest().setNumUpdates(5).setInterval(300L),
+            LocationRequest().setNumUpdates(NUMBER_OF_REQUEST).setInterval(INTERVAL),
             Dispatchers.IO
         ).collectIndexed { index, location ->
           Toast.makeText(
