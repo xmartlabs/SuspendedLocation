@@ -25,11 +25,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':core')
+    implementation project(':places')
 
     implementation deps.anotations
     implementation deps.appcompat
@@ -38,6 +50,10 @@ dependencies {
     implementation deps.corutines
     implementation deps.kotlin
     implementation deps.playServicesLocation
+    implementation deps.places
+    implementation deps.lifecycle
+    implementation deps.recyclerview
+    implementation deps.material
 
     testImplementation test.junit
     androidTestImplementation test.testJunit

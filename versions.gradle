@@ -25,6 +25,10 @@ versions.kotlin = "1.3.72"
 versions.places = "2.3.0"
 versions.playServicesLocation = "17.0.0"
 versions.testJunit = "1.1.1"
+versions.googleServices = "4.3.3"
+versions.lifecycle = "2.2.0"
+versions.recyclerview = "1.1.0"
+versions.material = "1.1.0-alpha06"
 
 ext.versions = versions
 
@@ -37,6 +41,9 @@ deps.corutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.cor
 deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 deps.places = "com.google.android.libraries.places:places:$versions.places"
 deps.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesLocation"
+deps.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+deps.material = "com.google.android.material:material:$versions.material"
 ext.deps = deps
 
 def test = [:]
@@ -51,6 +58,7 @@ buildscriptDeps.detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$vers
 buildscriptDeps.gradle = "com.android.tools.build:gradle:$versions.gradle"
 buildscriptDeps.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 buildscriptDeps.kotlinExtensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
+buildscriptDeps.googleServices = "com.google.gms:google-services:$versions.googleServices"
 ext.buildscriptDeps = buildscriptDeps
 
 static def addRepos(RepositoryHandler handler) {
