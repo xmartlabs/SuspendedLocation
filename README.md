@@ -1,6 +1,6 @@
 # Suspended Location
 ![Check and compile](https://github.com/xmartlabs/SuspendedLocation/workflows/Run%20lints%20and%20compile/badge.svg?branch=master)
-[![Release](https://jitpack.io/v/xmartlabs/AndroidSwissKnife.svg)](https://jitpack.io/#xmartlabs/SuspendedLocation)
+[![Release](https://jitpack.io/v/xmartlabs/AndroidSwissKnife.svg)](https://jitpack.io/#xmartlabs/SuspendedLocation:0.0.1)
 
 A library that wraps the google [places](https://developers.google.com/places/android-sdk/overview) and [geolocation](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) APIs through coroutines
 
@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-    implementation "com.github.xmartlabs.SuspendedLocation:core:1.0.0"
-    implementation "com.github.xmartlabs.SuspendedLocation:places:1.0.0"
+    implementation "com.github.xmartlabs.SuspendedLocation:core:0.0.1"
+    implementation "com.github.xmartlabs.SuspendedLocation:places:0.0.1"
 }
 ```
 
