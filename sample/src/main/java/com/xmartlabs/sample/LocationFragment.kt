@@ -10,9 +10,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.LocationRequest
+import com.xmartlabs.sample.databinding.LocationFragmentBinding
 import com.xmartlabs.suspendedlocation.core.LatLong
 import com.xmartlabs.suspendedlocation.core.SuspendedLocation
-import kotlinx.android.synthetic.main.location_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
@@ -23,23 +23,30 @@ class LocationFragment : Fragment() {
     const val INTERVAL = 300L
   }
 
+  lateinit var viewBinding: LocationFragmentBinding
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-      layoutInflater.inflate(R.layout.location_fragment, container, false)
+      LocationFragmentBinding.inflate(layoutInflater, container, false).let {
+        viewBinding = it
+        it.root
+      }
 
   @SuppressLint("MissingPermission")
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    btnGeocoding.isEnabled = false
-    btnReverseGeocoding.isEnabled = false
+    with(viewBinding) {
+      btnGeocoding.isEnabled = false
+      btnReverseGeocoding.isEnabled = false
 
-    addCurrentLocation()
-    addCurrentLocationMultipleTries()
-    addGeocoding()
-    addReverseGeocoding()
+      addCurrentLocation()
+      addCurrentLocationMultipleTries()
+      addGeocoding()
+      addReverseGeocoding()
+    }
   }
 
   @SuppressLint("MissingPermission")
-  private fun addCurrentLocationMultipleTries() {
+  private fun LocationFragmentBinding.addCurrentLocationMultipleTries() {
     btnCurrentLocationMultiple.setOnClickListener {
       lifecycleScope.launch() {
         SuspendedLocation.requestCurrentLocation(
@@ -57,7 +64,7 @@ class LocationFragment : Fragment() {
   }
 
   @SuppressLint("MissingPermission")
-  private fun addCurrentLocation() {
+  private fun LocationFragmentBinding.addCurrentLocation() {
     btnCurrentLocationSingle.setOnClickListener {
       lifecycleScope.launch() {
         val location = SuspendedLocation.requestCurrentLocation(Dispatchers.IO)
@@ -66,7 +73,7 @@ class LocationFragment : Fragment() {
     }
   }
 
-  private fun addGeocoding() {
+  private fun LocationFragmentBinding.addGeocoding() {
     etGeocoding.addTextChangedListener { text ->
       btnGeocoding.isEnabled = text?.isNotEmpty() ?: false
     }
@@ -79,7 +86,7 @@ class LocationFragment : Fragment() {
     }
   }
 
-  private fun addReverseGeocoding() {
+  private fun LocationFragmentBinding.addReverseGeocoding() {
     etGeocodingLat.addTextChangedListener { text ->
       btnReverseGeocoding.isEnabled = (text?.isNotEmpty()
           ?: false) && etGeocodingLng.text.isNotEmpty()

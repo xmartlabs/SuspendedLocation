@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -49,9 +52,9 @@ dependencies {
     implementation deps.kotlin
     implementation deps.playServicesLocation
     implementation deps.places
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "com.google.android.material:material:1.1.0-alpha06"
+    implementation deps.lifecycle
+    implementation deps.recyclerview
+    implementation deps.material
 
     testImplementation test.junit
     androidTestImplementation test.testJunit

@@ -7,20 +7,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.root.*
+import com.xmartlabs.sample.databinding.RootBinding
 
 class MainActivity : AppCompatActivity() {
   companion object {
     const val REQUEST_LOCATION_PERMISSION_CODE = 15
   }
+  lateinit var viewBinding: RootBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.root)
+    viewBinding = RootBinding.inflate(layoutInflater)
+    setContentView(viewBinding.root)
 
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
     supportActionBar?.setDisplayShowHomeEnabled(true)
-    btnLocations.setOnClickListener {
+    viewBinding.btnLocations.setOnClickListener {
       checkLocationPermissions {
         goToLocationFragment()
       }
