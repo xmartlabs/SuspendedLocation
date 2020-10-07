@@ -48,7 +48,7 @@ internal class SuspendedPlacesImpl(
   internal suspend fun findCurrentPlace(
       findCurrentPlaceRequest: FindCurrentPlaceRequest,
       runnerContext: CoroutineContext
-  ): List<PlaceLikelihood> = placesClient?.runWithPlaces {
+  ): List<PlaceLikelihood> = placesClient?.runWithPlaces(runnerContext) {
     findCurrentPlace(findCurrentPlaceRequest)
   }?.placeLikelihoods ?: listOf()
 
