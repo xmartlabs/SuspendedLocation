@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.tasks.Task
-import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompletePrediction
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceLikelihood
@@ -13,7 +12,6 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.xmartlabs.suspendedlocation.core.SuspendedLocation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -21,7 +19,7 @@ import kotlin.coroutines.CoroutineContext
 internal class SuspendedPlacesImpl(
     internal var context: Context,
     internal var placesClient: PlacesClient? = null
-){
+) {
 
   /**
    * A function that returns a [List] of [AutocompletePrediction] given a [FindAutocompletePredictionsRequest]

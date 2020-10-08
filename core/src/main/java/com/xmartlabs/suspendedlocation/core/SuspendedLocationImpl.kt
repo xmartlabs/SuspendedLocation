@@ -28,7 +28,8 @@ import kotlin.coroutines.suspendCoroutine
 
 internal class SuspendedLocationImpl(
     internal var context: Context,
-    internal var locationServices: FusedLocationProviderClient) {
+    internal var locationServices: FusedLocationProviderClient
+) {
 
   /**
    * A function that returns a [Flow] that emits your current [Location] given a [LocationRequest]
