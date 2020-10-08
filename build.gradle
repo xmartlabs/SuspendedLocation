@@ -24,8 +24,8 @@ detekt {
     config = files("$rootDir/.detekt/detekt-config.yml")
     input = files(
             "${rootProject.rootDir}/sample",
-            "${rootProject.rootDir}/SuspendLocation",
-            "${rootProject.rootDir}/SuspendedPlaces"
+            "${rootProject.rootDir}/core",
+            "${rootProject.rootDir}/places"
     )
     parallel = true
     toolVersion = "$versions.detekt"
