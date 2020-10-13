@@ -6,10 +6,7 @@ import android.location.Geocoder
 import android.location.Location
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationAvailability
-import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -17,7 +14,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import kotlin.coroutines.Continuation
@@ -50,26 +46,7 @@ internal class SuspendedLocationImpl(
     locationServices
         .requestLocationUpdates(
             locationRequest,
-            object : LocationCallback() {
-              @Synchronized
-              override fun onLocationResult(locationResult: LocationResult) {
-                launch(runnerContext) {
-                  this@callbackFlow.send(locationResult.lastLocation)
-                }
-              }
-
-              override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-                super.onLocationAvailability(locationAvailability)
-                if (!locationAvailability.isLocationAvailable) {
-                  launch(runnerContext) {
-                    this@callbackFlow.cancel(
-                        "Location not available",
-                        IOException("Location not available")
-                    )
-                  }
-                }
-              }
-            },
+            FlowLocationCallback(this, coroutineContext),
             locationServices.looper
         )
     awaitClose { cancel() }
@@ -92,24 +69,7 @@ internal class SuspendedLocationImpl(
       locationServices
           .requestLocationUpdates(
               LocationRequest().setInterval(1),
-              object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult) {
-                  launch(runnerContext) {
-                    continuation.resume(locationResult.lastLocation)
-                  }
-                }
-
-                override fun onLocationAvailability(locationAvailability: LocationAvailability) {
-                  super.onLocationAvailability(locationAvailability)
-                  if (!locationAvailability.isLocationAvailable) {
-                    launch(runnerContext) {
-                      continuation.resumeWithException(
-                          IOException("Location not available")
-                      )
-                    }
-                  }
-                }
-              },
+              CoroutineLocationCallback(this, continuation, runnerContext),
               locationServices.looper
           )
     }

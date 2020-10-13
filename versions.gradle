@@ -16,20 +16,20 @@ versions.anotations = "28.0.0"
 versions.appcompat = "1.1.0"
 versions.constraintLayout = "1.1.3"
 versions.coreKtx = "1.3.0"
-versions.corutines = "1.3.5"
+versions.corutines = "1.4.0-M1"
 versions.detekt = "1.8.0"
 versions.espresso = "3.2.0"
+versions.googleServices = "4.3.3"
 versions.gradle = "4.0.0"
 versions.junit = "4.12"
-versions.kotlin = "1.3.72"
+versions.kotlin = "1.4.10"
+versions.lifecycle = "2.2.0"
+versions.material = "1.1.0-alpha06"
+versions.mockk = "1.10.2"
 versions.places = "2.3.0"
 versions.playServicesLocation = "17.0.0"
-versions.testJunit = "1.1.1"
-versions.googleServices = "4.3.3"
-versions.lifecycle = "2.2.0"
 versions.recyclerview = "1.1.0"
-versions.material = "1.1.0-alpha06"
-
+versions.testJunit = "1.1.1"
 ext.versions = versions
 
 def deps = [:]
@@ -39,17 +39,19 @@ deps.constraintLayout = "androidx.constraintlayout:constraintlayout:$versions.co
 deps.coreKtx = "androidx.core:core-ktx:$versions.coreKtx"
 deps.corutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.corutines"
 deps.kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+deps.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
+deps.material = "com.google.android.material:material:$versions.material"
 deps.places = "com.google.android.libraries.places:places:$versions.places"
 deps.playServicesLocation = "com.google.android.gms:play-services-location:$versions.playServicesLocation"
-deps.lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle"
 deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
-deps.material = "com.google.android.material:material:$versions.material"
 ext.deps = deps
 
 def test = [:]
-test.junit = "junit:junit:$versions.junit"
-test.testJunit = "androidx.test.ext:junit:$versions.testJunit"
+test.corutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.corutines"
 test.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+test.junit = "junit:junit:$versions.junit"
+test.mockk = "io.mockk:mockk:$versions.mockk"
+test.testJunit = "androidx.test.ext:junit:$versions.testJunit"
 
 ext.test = test
 
