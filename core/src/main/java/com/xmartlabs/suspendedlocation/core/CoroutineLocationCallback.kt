@@ -5,7 +5,7 @@ import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
@@ -18,7 +18,7 @@ internal class CoroutineLocationCallback(
     val runnerContext: CoroutineContext
 ) : LocationCallback() {
   override fun onLocationResult(locationResult: LocationResult) {
-    scope.launch(runnerContext) {
+    runBlocking(runnerContext) {
       continuation.resume(locationResult.lastLocation)
     }
   }
@@ -26,7 +26,7 @@ internal class CoroutineLocationCallback(
   override fun onLocationAvailability(locationAvailability: LocationAvailability) {
     super.onLocationAvailability(locationAvailability)
     if (!locationAvailability.isLocationAvailable) {
-      scope.launch(runnerContext) {
+      runBlocking(runnerContext) {
         continuation.resumeWithException(
             IOException("Location not available")
         )
