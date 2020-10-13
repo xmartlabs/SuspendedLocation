@@ -19,7 +19,6 @@ object SuspendedPlaces {
   private lateinit var suspendedPlacesImpl: SuspendedPlacesImpl
 
   fun initialize(context: Context) {
-
     SuspendedLocation.initialize(context)
     var placesClient: PlacesClient? = null
     if (Places.isInitialized()) {
