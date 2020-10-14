@@ -15,10 +15,10 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.xmartlabs.suspendedlocation.core.SuspendedLocation
 import kotlin.coroutines.CoroutineContext
 
-object SuspendedPlaces {
+public object SuspendedPlaces {
   private lateinit var suspendedPlacesImpl: SuspendedPlacesImpl
 
-  fun initialize(context: Context) {
+  public fun initialize(context: Context) {
     SuspendedLocation.initialize(context)
     var placesClient: PlacesClient? = null
     if (Places.isInitialized()) {
@@ -33,7 +33,7 @@ object SuspendedPlaces {
    * @param autocompleteRequest The [FindAutocompletePredictionsRequest] to be made.
    * @param runnerContext The context in which the function will be executed.
    */
-  suspend fun placesAutocomplete(
+  public suspend fun placesAutocomplete(
       autocompleteRequest: FindAutocompletePredictionsRequest,
       runnerContext: CoroutineContext
   ): List<AutocompletePrediction> = suspendedPlacesImpl.placesAutocomplete(
@@ -50,7 +50,7 @@ object SuspendedPlaces {
   @RequiresPermission(
       anyOf = ["android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_WIFI_STATE"]
   )
-  suspend fun findCurrentPlace(
+  public suspend fun findCurrentPlace(
       findCurrentPlaceRequest: FindCurrentPlaceRequest,
       runnerContext: CoroutineContext
   ): List<PlaceLikelihood> = suspendedPlacesImpl.findCurrentPlace(
@@ -64,7 +64,7 @@ object SuspendedPlaces {
    * @param fetchPlaceRequest The [FetchPlaceRequest] to be made.
    * @param runnerContext The context in which the function will be executed.
    */
-  suspend fun fetchPlace(
+  public suspend fun fetchPlace(
       fetchPlaceRequest: FetchPlaceRequest,
       runnerContext: CoroutineContext
   ): Place? = suspendedPlacesImpl.fetchPlace(
@@ -78,7 +78,7 @@ object SuspendedPlaces {
    * @param fetchPhotoRequest The [FetchPhotoRequest] to be made.
    * @param runnerContext The context in which the function will be executed.
    */
-  suspend fun fetchPhoto(
+  public suspend fun fetchPhoto(
       fetchPhotoRequest: FetchPhotoRequest,
       runnerContext: CoroutineContext
   ): Bitmap? = suspendedPlacesImpl.fetchPhoto(

@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.Flow
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
-object SuspendedLocation {
+public object SuspendedLocation {
   private lateinit var suspendedLocationImpl: SuspendedLocationImpl
 
-  fun initialize(context: Context) {
+  public fun initialize(context: Context) {
     val locationServices = LocationServices.getFusedLocationProviderClient(context)
     suspendedLocationImpl = SuspendedLocationImpl(context, locationServices)
   }
@@ -32,7 +32,7 @@ object SuspendedLocation {
   @RequiresPermission(
       anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
   )
-  fun requestCurrentLocation(
+  public fun requestCurrentLocation(
       locationRequest: LocationRequest,
       runnerContext: CoroutineContext = Dispatchers.Default
   ): Flow<Location> = suspendedLocationImpl.requestCurrentLocation(locationRequest, runnerContext)
@@ -47,7 +47,7 @@ object SuspendedLocation {
   @RequiresPermission(
       anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
   )
-  suspend fun requestCurrentLocation(
+  public suspend fun requestCurrentLocation(
       runnerContext: CoroutineContext = Dispatchers.Default
   ): Location = suspendedLocationImpl.requestCurrentLocation(runnerContext)
 
@@ -66,7 +66,7 @@ object SuspendedLocation {
    * @throws IOException if the network is unavailable or any other
    * I/O problem occurs
    */
-  suspend fun reverseGeocode(
+  public suspend fun reverseGeocode(
       location: LatLong,
       maxResults: Int,
       runnerContext: CoroutineContext = Dispatchers.Default
@@ -83,7 +83,7 @@ object SuspendedLocation {
    * @throws IOException if the network is unavailable or any other
    * I/O problem occurs
    */
-  suspend fun geocode(
+  public suspend fun geocode(
       locationName: String,
       maxResults: Int,
       runnerContext: CoroutineContext = Dispatchers.Default
@@ -106,7 +106,7 @@ object SuspendedLocation {
    * @throws IOException if the network is unavailable or any other
    * I/O problem occurs
    */
-  suspend fun geocode(
+  public suspend fun geocode(
       locationName: String,
       startingPoint: LatLong,
       endPoint: LatLong,
