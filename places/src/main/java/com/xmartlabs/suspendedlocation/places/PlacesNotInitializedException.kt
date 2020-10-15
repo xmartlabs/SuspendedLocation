@@ -7,4 +7,4 @@ import java.lang.RuntimeException
 * https://developers.google.com/places/android-sdk/start#maps_places_get_started-kotlin
 *
 *  */
-class PlacesNotInitializedException : RuntimeException("Places not initialized")
+public class PlacesNotInitializedException : RuntimeException("Places not initialized")

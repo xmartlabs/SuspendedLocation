@@ -22,6 +22,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    kotlin.explicitApi = 'strict'
+
+    kotlinOptions {
+        freeCompilerArgs += [
+                '-Xexplicit-api=strict',
+        ]
+    }
 }
 
 dependencies {

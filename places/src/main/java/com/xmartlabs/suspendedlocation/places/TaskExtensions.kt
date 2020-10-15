@@ -5,7 +5,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-suspend fun <T> Task<T>.taskToCoroutine() = suspendCoroutine<T> { continuation ->
+internal suspend fun <T> Task<T>.taskToCoroutine() = suspendCoroutine<T> { continuation ->
     addOnSuccessListener { result ->
         continuation.resume(result)
     }

@@ -6,4 +6,4 @@ package com.xmartlabs.suspendedlocation.core
  * @param lat Indicates the latitude of the coordinate.
  * @param long Indicates the longitude of the coordinate.
  */
-data class LatLong(val lat: Double, val long: Double)
+public data class LatLong(val lat: Double, val long: Double)
